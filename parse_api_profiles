@@ -1,0 +1,35 @@
+
+def get_url(param):
+    url=row.get(param)
+    url=urljoin(base_url,url)
+    return url
+
+
+def build_text(param:str)->list:
+    possible_options=['Primary', 'Secondary']
+    possible_params=[i+param for i in possible_options]
+    return possible_params
+
+def get_locations(s):
+    possible_locations=build_text('Office')
+    for location in possible_locations:
+        a=s.get(location)
+        if a:
+            a=a.get('Name')
+            print(a)
+
+def get_phones(s):
+    possible_phones=build_text('Phone')
+    for phone in possible_phones:
+        a=s.get(phone)
+        if a!='':
+            print(a)
+
+for row in api_response:
+    id=row.get('ID')
+    name=row.get('Name')
+    url=get_url(param="Url")
+    email=row.get('Email')
+    position=row.get('Level')
+    a=get_locations(row)
+    phone=get_phones(row)
